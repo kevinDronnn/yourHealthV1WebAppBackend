@@ -1,0 +1,46 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+/src/main/java/com/example/yourhealthv1/repository/TestRepository.java
+/src/main/java/com/example/yourhealthv1/entity/Test.java
+/src/main/java/com/example/yourhealthv1/service/TestService.java
+/src/main/java/com/example/yourhealthv1/controllers/TestController.java
+/src/main/resources/application.properties
+/src/main/java/com/example/yourhealthv1/controllers/RecipesController.java
+/src/main/java/com/example/yourhealthv1/controllers/RecipesProductsController.java
+/src/main/java/com/example/yourhealthv1/entity/Recipes.java
+/src/main/java/com/example/yourhealthv1/entity/RecipesProducts.java
+/src/main/java/com/example/yourhealthv1/repository/RecipesProductsRepository.java
+/src/main/java/com/example/yourhealthv1/repository/RecipesRepository.java
+/src/main/java/com/example/yourhealthv1/service/RecipesProductsService.java
+/src/main/java/com/example/yourhealthv1/service/RecipesService.java
