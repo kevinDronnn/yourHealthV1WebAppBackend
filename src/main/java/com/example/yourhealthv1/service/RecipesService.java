@@ -18,6 +18,10 @@ public class RecipesService {
         return recipesRepository.findAll();
     }
 
+    public Recipes getRecipesById(int id) {
+        return recipesRepository.getReferenceById(id);
+    }
+
     @Transactional
     public Recipes saveRecipe(Recipes recipe) {
         return recipesRepository.save(recipe);

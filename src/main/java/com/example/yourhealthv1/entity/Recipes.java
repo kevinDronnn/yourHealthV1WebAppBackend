@@ -17,7 +17,7 @@ public class Recipes {
     @Column(name = "description")
     private String description;
     @Lob
-    @Column(name = "image", columnDefinition = "BLOB")
+    @Column(name = "image", columnDefinition = "LONGBLOB")
     private byte[] image;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "recipes")
     private List<RecipesProducts> products;
