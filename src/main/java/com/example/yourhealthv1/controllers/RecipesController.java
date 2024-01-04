@@ -2,13 +2,13 @@ package com.example.yourhealthv1.controllers;
 
 import com.example.yourhealthv1.entity.Recipes;
 import com.example.yourhealthv1.entity.RecipesProducts;
-import com.example.yourhealthv1.service.RecipesProductsService;
 import com.example.yourhealthv1.service.RecipesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -32,9 +32,14 @@ public class RecipesController {
             if (file.isEmpty()) {
                 return ResponseEntity.badRequest().body("File is empty");
             }
-
-            byte[] imageBytes = file.getBytes();
-            Recipes recipes = new Recipes(name, description, imageBytes);
+//            byte[] imageBytes = file.getBytes();
+            String path = file.getOriginalFilename();
+            File file2 = new File
+                    ("C:\\Users\\voros\\Desktop\\Your health\\images\\Recipces Page\\"
+                            +name+path.substring(path.lastIndexOf(".") ));
+            file.transferTo(file2);
+//            Recipes recipes = new Recipes(name, description, imageBytes);
+            Recipes recipes = new Recipes(name, description, file2.getAbsolutePath());
 
             List<RecipesProducts> productsList = new ArrayList<>();
             for (int i = 0; i < productNames.length; i++) {

@@ -1,5 +1,6 @@
 package com.example.yourhealthv1.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,8 +14,9 @@ public class RecipesProducts {
     private String productName;
     @Column(name = "grams")
     private int grams;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id")
+    @JsonBackReference
     private Recipes recipes;
 
     public RecipesProducts() {

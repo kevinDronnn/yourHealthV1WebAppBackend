@@ -1,8 +1,8 @@
 package com.example.yourhealthv1.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -16,17 +16,21 @@ public class Recipes {
     private String name;
     @Column(name = "description")
     private String description;
-    @Lob
-    @Column(name = "image", columnDefinition = "LONGBLOB")
-    private byte[] image;
+//    @Lob
+//    @Column(name = "image", columnDefinition = "LONGBLOB")
+//    private byte[] image;
+
+    @Column(name = "image")
+    private String image;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "recipes")
+    @JsonManagedReference
     private List<RecipesProducts> products;
 
 
     public Recipes() {
     }
 
-    public Recipes(String name, String description, byte[] image) {
+    public Recipes(String name, String description, String image) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -56,11 +60,11 @@ public class Recipes {
         this.description = description;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImageString (String image) {
         this.image = image;
     }
 
@@ -78,7 +82,7 @@ public class Recipes {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", image=" + Arrays.toString(image) +
+                ", image=" +  image +
                 ", products=" + products +
                 '}';
     }
