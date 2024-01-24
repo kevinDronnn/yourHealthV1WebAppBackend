@@ -1,7 +1,7 @@
 package com.example.yourhealthv1.controllers;
 
-import com.example.yourhealthv1.repository.AdvicesRepository;
 import com.example.yourhealthv1.entity.Advices;
+import com.example.yourhealthv1.service.AdvicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,22 +13,21 @@ import java.util.List;
 public class AdvicesController {
 
     @Autowired
-    AdvicesRepository advicesRepository;
+    AdvicesService advicesService;
 
     @PostMapping("/advice")
-    Advices addAdvice(@RequestBody Advices newAdvice){
-        return advicesRepository.save(newAdvice);
+    Advices save(@RequestBody Advices newAdvice){
+        return advicesService.addAdvices(newAdvice);
     }
 
     @GetMapping("/advices")
     List<Advices> getAllAdvices(){
-        return advicesRepository.findAll();
+        return advicesService.getAdvices();
     }
 
     @DeleteMapping("/advices/{id}")
     public String deleteAdvice(@PathVariable int id) {
-        Advices advice = advicesRepository.getReferenceById(id);
-        advicesRepository.delete(advice);
+        advicesService.deleteAdvice(id);
         return "advice was deleted, id=" + id;
     }
 }
