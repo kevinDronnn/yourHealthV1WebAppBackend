@@ -16,12 +16,12 @@ public class AdvicesController {
     AdvicesService advicesService;
 
     @PostMapping("/advice")
-    Advices save(@RequestBody Advices newAdvice){
+    Advices save(@RequestBody Advices newAdvice) {
         return advicesService.addAdvices(newAdvice);
     }
 
     @GetMapping("/advices")
-    List<Advices> getAllAdvices(){
+    List<Advices> getAllAdvices() {
         return advicesService.getAdvices();
     }
 

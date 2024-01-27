@@ -16,9 +16,6 @@ public class ProductsService {
         return productsRepository.findAll();
     }
 
-    public Products getProductById(int id) {
-        return productsRepository.getReferenceById(id);
-    }
     @Transactional
     public Products addProduct(Products products) {
         return productsRepository.save(products);

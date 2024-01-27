@@ -83,7 +83,7 @@ public class Recipes {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", image=" +  image +
-                ", products=" + products +
+//                ", products=" + products +
                 '}';
     }
 }

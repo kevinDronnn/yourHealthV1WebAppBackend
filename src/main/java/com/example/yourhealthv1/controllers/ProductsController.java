@@ -16,12 +16,12 @@ public class ProductsController {
     ProductsService productsService;
 
     @PostMapping("/product")
-    Products addProduct(@RequestBody Products product){
+    Products addProduct(@RequestBody Products product) {
         return productsService.addProduct(product);
     }
 
     @GetMapping("/products")
-    List<Products> getAllProducts(){
+    List<Products> getAllProducts() {
         return productsService.getAllProducts();
     }
 

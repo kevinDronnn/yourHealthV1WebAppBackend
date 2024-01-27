@@ -22,6 +22,7 @@ public class RecipesController {
     @Autowired
     RecipesService recipesService;
 
+
     @PostMapping("/recipe")
     ResponseEntity<String> addRecipe(@RequestParam("recipe_name") String name,
                                      @RequestParam("recipe_description") String description,
@@ -36,7 +37,7 @@ public class RecipesController {
             String path = file.getOriginalFilename();
             File file2 = new File
                     ("C:\\Users\\voros\\Desktop\\Your health\\images\\Recipces Page\\"
-                            +name+path.substring(path.lastIndexOf(".") ));
+                            + name + path.substring(path.lastIndexOf(".")));
             file.transferTo(file2);
 //            Recipes recipes = new Recipes(name, description, imageBytes);
             Recipes recipes = new Recipes(name, description, file2.getAbsolutePath());
@@ -69,6 +70,7 @@ public class RecipesController {
     public Recipes getRecipeById(@PathVariable int id) {
         return recipesService.getRecipesById(id);
     }
+
     @DeleteMapping("/recipe/{id}")
     public void deleteRecipe(@PathVariable int id) {
         recipesService.removeRecipe(id);

@@ -65,7 +65,7 @@ public class RecipesProducts {
                 "recipeProductId=" + recipeProductId +
                 ", productName='" + productName + '\'' +
                 ", grams=" + grams +
-                ", recipe=" + recipes +
+//                ", recipe=" + recipes +
                 '}';
     }
 }
