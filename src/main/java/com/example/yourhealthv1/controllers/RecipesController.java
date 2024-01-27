@@ -3,6 +3,8 @@ package com.example.yourhealthv1.controllers;
 import com.example.yourhealthv1.entity.Recipes;
 import com.example.yourhealthv1.entity.RecipesProducts;
 import com.example.yourhealthv1.service.RecipesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,10 @@ import java.util.List;
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class RecipesController {
+
+    private static Logger logger = LoggerFactory.getLogger(AdvicesController.class);
     @Autowired
     RecipesService recipesService;
-
 
     @PostMapping("/recipe")
     ResponseEntity<String> addRecipe(@RequestParam("recipe_name") String name,
@@ -52,6 +55,7 @@ public class RecipesController {
                 productsList.add(recipesProducts);
             }
             recipes.setProducts(productsList);
+            logger.info("Recipe was added: " + recipes.getName());
             recipesService.saveRecipe(recipes);
 
             return ResponseEntity.ok("File uploaded successfully");
@@ -73,6 +77,7 @@ public class RecipesController {
 
     @DeleteMapping("/recipe/{id}")
     public void deleteRecipe(@PathVariable int id) {
+        logger.info("Recipe with id="+id+" was deleted");
         recipesService.removeRecipe(id);
     }
 }
