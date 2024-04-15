@@ -29,6 +29,7 @@ public class RecipesController {
     @PostMapping("/recipe")
     ResponseEntity<String> addRecipe(@RequestParam("recipe_name") String name,
                                      @RequestParam("recipe_description") String description,
+                                     @RequestParam("authorName") String authorName,
                                      @RequestParam("recipe_image") MultipartFile file,
                                      @RequestParam("products_name") String[] productNames,
                                      @RequestParam("products_grams") String[] productGrams) {
@@ -43,7 +44,7 @@ public class RecipesController {
                             + name + path.substring(path.lastIndexOf(".")));
             file.transferTo(file2);
 //            Recipes recipes = new Recipes(name, description, imageBytes);
-            Recipes recipes = new Recipes(name, description, file2.getAbsolutePath());
+            Recipes recipes = new Recipes(name, description, file2.getAbsolutePath(), authorName);
 
             List<RecipesProducts> productsList = new ArrayList<>();
             for (int i = 0; i < productNames.length; i++) {
@@ -70,12 +71,17 @@ public class RecipesController {
         return recipesService.getRecipes();
     }
 
+    @GetMapping("/recipe/author/{author}")
+    List<Recipes> getAllRecipesOfAuthor(@PathVariable String author) {
+        return recipesService.getRecipesByAuthor(author);
+    }
+
     @GetMapping("/recipe/{id}")
     public Recipes getRecipeById(@PathVariable int id) {
         return recipesService.getRecipesById(id);
     }
 
-    @DeleteMapping("/recipe/{id}")
+    @DeleteMapping("/recipe/delete/{id}")
     public void deleteRecipe(@PathVariable int id) {
         logger.info("Recipe with id="+id+" was deleted");
         recipesService.removeRecipe(id);

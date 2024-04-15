@@ -16,9 +16,6 @@ public class Recipes {
     private String name;
     @Column(name = "description")
     private String description;
-//    @Lob
-//    @Column(name = "image", columnDefinition = "LONGBLOB")
-//    private byte[] image;
 
     @Column(name = "image")
     private String image;
@@ -26,15 +23,25 @@ public class Recipes {
     @JsonManagedReference
     private List<RecipesProducts> products;
 
+    @Column(name = "author_name")
+    private String authorName;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    private List<Comments> commentsList;
+
+
 
     public Recipes() {
     }
 
-    public Recipes(String name, String description, String image) {
+    public Recipes(String name, String description, String image, String authorName) {
         this.name = name;
         this.description = description;
         this.image = image;
+        this.authorName = authorName;
     }
+
 
     public int getId() {
         return id;
@@ -76,14 +83,30 @@ public class Recipes {
         this.products = products;
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public List<Comments> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(List<Comments> commentsList) {
+        this.commentsList = commentsList;
+    }
+
     @Override
     public String toString() {
         return "Recipes{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", image=" +  image +
-//                ", products=" + products +
+                ", image='" + image + '\'' +
+                ", authorName='" + authorName + '\'' +
                 '}';
     }
 }

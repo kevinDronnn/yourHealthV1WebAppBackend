@@ -15,6 +15,9 @@ public class AdvicesService {
     public List<Advices> getAdvices() {
         return advicesRepository.findAll();
     }
+    public List<Advices> getAdvicesByAuthor(String name) {
+        return advicesRepository.getAdvicesByAuthorName(name);
+    }
     @Transactional
     public Advices addAdvices(Advices advices) {
         return advicesRepository.save(advices);
@@ -23,4 +26,6 @@ public class AdvicesService {
     public void deleteAdvice(int id) {
         advicesRepository.deleteById(id);
     }
+
+
 }

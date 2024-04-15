@@ -18,6 +18,10 @@ public class RecipesService {
         return recipesRepository.findAll();
     }
 
+    public List<Recipes> getRecipesByAuthor(String name) {
+        return recipesRepository.getRecipesByAuthorName(name);
+    }
+
     public Recipes getRecipesById(int id) {
         return recipesRepository.getReferenceById(id);
     }

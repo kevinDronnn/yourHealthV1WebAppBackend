@@ -14,12 +14,16 @@ public class Advices {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "author_name")
+    private String authorName;
+
     public Advices() {
     }
 
-    public Advices(String title, String description) {
+    public Advices(String title, String description, String authorName) {
         this.title = title;
         this.description = description;
+        this.authorName = authorName;
     }
 
     public int getId() {
@@ -46,12 +50,22 @@ public class Advices {
         this.description = description;
     }
 
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
 
     @Override
     public String toString() {
         return "Advices{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", authorName='" + authorName + '\'' +
                 '}';
     }
 }

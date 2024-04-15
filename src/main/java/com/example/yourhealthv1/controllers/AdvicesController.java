@@ -28,6 +28,11 @@ public class AdvicesController {
         return advicesService.getAdvices();
     }
 
+    @GetMapping("/advices/author/{author}")
+    List<Advices> getAllAdvicesOfAuthor(@PathVariable String author) {
+        return advicesService.getAdvicesByAuthor(author);
+    }
+
     @DeleteMapping("/advices/{id}")
     public String deleteAdvice(@PathVariable int id) {
         advicesService.deleteAdvice(id);
