@@ -1,4 +1,4 @@
-package com.example.yourhealthv1.controllers;
+package com.example.yourhealthv1.controller;
 
 import com.example.yourhealthv1.entity.AuthenticationResponse;
 import com.example.yourhealthv1.entity.Users;
@@ -43,6 +43,9 @@ public class AuthenticationController {
         if (authentication.isAuthenticated()) {
             Map<String, String> response = new HashMap<>();
             response.put("username", authentication.getName());
+            response.put("authority", authentication.getAuthorities()
+                    .toString()
+                    .substring(1,authentication.getAuthorities().toString().length()-1));
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("error", "user not authorized"));

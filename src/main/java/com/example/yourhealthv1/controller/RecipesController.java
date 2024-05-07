@@ -1,10 +1,8 @@
-package com.example.yourhealthv1.controllers;
+package com.example.yourhealthv1.controller;
 
 import com.example.yourhealthv1.entity.Recipes;
 import com.example.yourhealthv1.entity.RecipesProducts;
 import com.example.yourhealthv1.service.RecipesService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +13,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -22,7 +21,6 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class RecipesController {
 
-    private static Logger logger = LoggerFactory.getLogger(AdvicesController.class);
     @Autowired
     RecipesService recipesService;
 
@@ -32,7 +30,12 @@ public class RecipesController {
                                      @RequestParam("authorName") String authorName,
                                      @RequestParam("recipe_image") MultipartFile file,
                                      @RequestParam("products_name") String[] productNames,
-                                     @RequestParam("products_grams") String[] productGrams) {
+                                     @RequestParam("products_grams") String[] productGrams,
+                                     @RequestParam("total_grams") double totalGrams,
+                                     @RequestParam("carbs") double carbs,
+                                     @RequestParam("cals") double cals,
+                                     @RequestParam("fats") double fats,
+                                     @RequestParam("proteins") double proteins) {
         try {
             if (file.isEmpty()) {
                 return ResponseEntity.badRequest().body("File is empty");
@@ -44,7 +47,8 @@ public class RecipesController {
                             + name + path.substring(path.lastIndexOf(".")));
             file.transferTo(file2);
 //            Recipes recipes = new Recipes(name, description, imageBytes);
-            Recipes recipes = new Recipes(name, description, file2.getAbsolutePath(), authorName);
+            Recipes recipes = new
+                    Recipes(name, description, file2.getAbsolutePath(), authorName, totalGrams , cals , proteins , carbs , fats);
 
             List<RecipesProducts> productsList = new ArrayList<>();
             for (int i = 0; i < productNames.length; i++) {
@@ -56,7 +60,6 @@ public class RecipesController {
                 productsList.add(recipesProducts);
             }
             recipes.setProducts(productsList);
-            logger.info("Recipe was added: " + recipes.getName());
             recipesService.saveRecipe(recipes);
 
             return ResponseEntity.ok("File uploaded successfully");
@@ -67,24 +70,32 @@ public class RecipesController {
     }
 
     @GetMapping("/recipe")
-    List<Recipes> getAllRecipes() {
-        return recipesService.getRecipes();
+    ResponseEntity<List<Recipes>> getAllRecipes() {
+        return ResponseEntity.ok(recipesService.getRecipes());
     }
 
     @GetMapping("/recipe/author/{author}")
-    List<Recipes> getAllRecipesOfAuthor(@PathVariable String author) {
-        return recipesService.getRecipesByAuthor(author);
+    ResponseEntity<List<Recipes>> getAllRecipesOfAuthor(@PathVariable String author) {
+        try {
+            return ResponseEntity.ok(recipesService.getRecipesByAuthor(author));
+        }catch (NoSuchElementException e){
+            return ResponseEntity.badRequest().body(List.of(new Recipes()));
+        }
     }
 
     @GetMapping("/recipe/{id}")
-    public Recipes getRecipeById(@PathVariable int id) {
-        return recipesService.getRecipesById(id);
+    public ResponseEntity<Recipes> getRecipeById(@PathVariable int id) {
+        try{
+            return ResponseEntity.ok(recipesService.getRecipesById(id));
+        }catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest().body(new Recipes());
+        }
     }
 
     @DeleteMapping("/recipe/delete/{id}")
-    public void deleteRecipe(@PathVariable int id) {
-        logger.info("Recipe with id="+id+" was deleted");
+    public ResponseEntity<String> deleteRecipe(@PathVariable int id) {
         recipesService.removeRecipe(id);
+        return ResponseEntity.ok("Recipe with id="+id+" was deleted");
     }
 }
 

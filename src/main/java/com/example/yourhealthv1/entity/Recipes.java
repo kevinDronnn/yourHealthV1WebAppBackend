@@ -26,6 +26,18 @@ public class Recipes {
     @Column(name = "author_name")
     private String authorName;
 
+
+    @Column(name = "total_grams")
+    private double grams;
+    @Column(name = "cals")
+    private double cals;
+    @Column(name = "proteins")
+    private double proteins;
+    @Column(name = "carbs")
+    private double carbs;
+    @Column(name = "fats")
+    private double fats;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private List<Comments> commentsList;
@@ -35,13 +47,18 @@ public class Recipes {
     public Recipes() {
     }
 
-    public Recipes(String name, String description, String image, String authorName) {
+
+    public Recipes(String name, String description, String image, String authorName, double grams, double cals, double proteins, double carbs, double fats) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.authorName = authorName;
+        this.grams = grams;
+        this.cals = cals;
+        this.proteins = proteins;
+        this.carbs = carbs;
+        this.fats = fats;
     }
-
 
     public int getId() {
         return id;
@@ -97,6 +114,47 @@ public class Recipes {
 
     public void setCommentsList(List<Comments> commentsList) {
         this.commentsList = commentsList;
+    }
+
+
+    public double getGrams() {
+        return grams;
+    }
+
+    public void setGrams(double grams) {
+        this.grams = grams;
+    }
+
+    public double getCals() {
+        return cals;
+    }
+
+    public void setCals(double cals) {
+        this.cals = cals;
+    }
+
+    public double getProteins() {
+        return proteins;
+    }
+
+    public void setProteins(double proteins) {
+        this.proteins = proteins;
+    }
+
+    public double getCarbs() {
+        return carbs;
+    }
+
+    public void setCarbs(double carbs) {
+        this.carbs = carbs;
+    }
+
+    public double getFats() {
+        return fats;
+    }
+
+    public void setFats(double fats) {
+        this.fats = fats;
     }
 
     @Override

@@ -34,10 +34,10 @@ build/
 /src/main/java/com/example/yourhealthv1/repository/TestRepository.java
 /src/main/java/com/example/yourhealthv1/entity/Test.java
 /src/main/java/com/example/yourhealthv1/service/TestService.java
-/src/main/java/com/example/yourhealthv1/controllers/TestController.java
+/src/main/java/com/example/yourhealthv1/controller/TestController.java
 /src/main/resources/application.properties
-/src/main/java/com/example/yourhealthv1/controllers/RecipesController.java
-/src/main/java/com/example/yourhealthv1/controllers/RecipesProductsController.java
+/src/main/java/com/example/yourhealthv1/controller/RecipesController.java
+/src/main/java/com/example/yourhealthv1/controller/RecipesProductsController.java
 /src/main/java/com/example/yourhealthv1/entity/Recipes.java
 /src/main/java/com/example/yourhealthv1/entity/RecipesProducts.java
 /src/main/java/com/example/yourhealthv1/repository/RecipesProductsRepository.java
