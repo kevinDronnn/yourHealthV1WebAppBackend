@@ -1,7 +1,8 @@
 package com.example.yourhealthv1.controller;
 
+import com.example.yourhealthv1.dto.CalendarDto;
 import com.example.yourhealthv1.dto.WorkoutDto;
-import com.example.yourhealthv1.service.WorkoutsService;
+import com.example.yourhealthv1.service.CalendarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,39 +25,38 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-class WorkoutsControllerTest {
+class CalendarControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private WorkoutsService service;
+    private CalendarService service;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     @Test
-    public void shouldAddWorkout() throws Exception{
-        WorkoutDto workoutDto = new WorkoutDto("popa", new Date() , 55);
-        doNothing().when(service).saveWorkouts(any(WorkoutDto.class));
+    public void shouldAddNote() throws Exception{
+        CalendarDto calendarDto = new CalendarDto("name",new Date(), "some text");
+        doNothing().when(service).saveNote(any(CalendarDto.class));
 
-        mockMvc.perform(post("/api/saveWorkout")
+        mockMvc.perform(post("/api/saveNote")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(workoutDto)))
+                        .content(objectMapper.writeValueAsString(calendarDto)))
                 .andExpect(status().isCreated());
 
-        verify(service, times(1)).saveWorkouts(any(WorkoutDto.class));
+        verify(service, times(1)).saveNote(any(CalendarDto.class));
     }
 
     @Test
-    public void shouldGetAllWeightsByAuthor() throws Exception{
-        when(service.getWorkouts("name")).thenReturn(List.of(new WorkoutDto()));
+    public void shouldGetAllNotesByAuthor() throws Exception{
+        when(service.getAll("name")).thenReturn(List.of(new CalendarDto()));
 
-        mockMvc.perform(get("/api/getAllWorkouts/{name}","name")
+        mockMvc.perform(get("/api/getNotes/{name}","name")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(service, times(1)).getWorkouts("name");
+        verify(service, times(1)).getAll("name");
     }
-
 }
