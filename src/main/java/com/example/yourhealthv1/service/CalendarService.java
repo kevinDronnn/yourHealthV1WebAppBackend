@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,4 +38,16 @@ public class CalendarService {
         }
 
     }
+
+    public CalendarDto getNote(LocalDate date, String name){
+        Calendar calendar = repository.getByDateAndName(date,name);
+        if (calendar!=null){
+            return CalendarMapper.INSTANCE.calendarEntityToCalendarDto(calendar);
+        }else {
+            throw new EntityNotFoundException();
+        }
+
+    }
+
+
 }

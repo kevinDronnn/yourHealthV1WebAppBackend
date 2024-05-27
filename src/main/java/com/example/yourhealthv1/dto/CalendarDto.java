@@ -1,20 +1,21 @@
 package com.example.yourhealthv1.dto;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class CalendarDto {
 
     private String name;
 
-    private Date date;
+    private LocalDate date;
 
     private String text;
 
     public CalendarDto() {
     }
 
-    public CalendarDto(String name, Date date, String text) {
+    public CalendarDto(String name, LocalDate date, String text) {
         this.name = name;
         this.date = date;
         this.text = text;
@@ -36,11 +37,20 @@ public class CalendarDto {
         this.name = name;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "CalendarDto{" +
+                "name='" + name + '\'' +
+                ", date=" + date +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

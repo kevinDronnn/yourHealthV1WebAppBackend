@@ -2,7 +2,7 @@ package com.example.yourhealthv1.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "health_calendar")
@@ -14,14 +14,14 @@ public class Calendar {
     @Column(name = "name")
     private String name;
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
     @Column(name = "text")
     private String text;
 
     public Calendar() {
     }
 
-    public Calendar(String name, Date date, String text) {
+    public Calendar(String name, LocalDate date, String text) {
         this.name = name;
         this.date = date;
         this.text = text;
@@ -51,11 +51,21 @@ public class Calendar {
         this.name = name;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Calendar{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                ", text='" + text + '\'' +
+                '}';
     }
 }
