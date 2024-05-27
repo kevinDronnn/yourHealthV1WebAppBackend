@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ class CalendarControllerTest {
 
     @Test
     public void shouldAddNote() throws Exception{
-        CalendarDto calendarDto = new CalendarDto("name",new Date(), "some text");
+        CalendarDto calendarDto = new CalendarDto("name", LocalDate.now(), "some text");
         doNothing().when(service).saveNote(any(CalendarDto.class));
 
         mockMvc.perform(post("/api/saveNote")

@@ -22,5 +22,10 @@ public interface CalendarMapper {
     @Mapping(target = "name", source = "name")
     @Mapping(target = "date", source = "date")
     @Mapping(target = "text", source = "text")
+    CalendarDto calendarEntityToCalendarDto(Calendar calendar);
+
+    @Mapping(target = "name", source = "name")
+    @Mapping(target = "date", source = "date")
+    @Mapping(target = "text", source = "text")
     List<CalendarDto> calendarEntityToCalendarDto(List<Calendar> calendars);
 }
