@@ -1,6 +1,7 @@
 package com.example.yourhealthv1.dto;
 
 public class AdviceDto {
+    private int id;
     private String title;
 
     private String description;
@@ -10,10 +11,19 @@ public class AdviceDto {
     public AdviceDto() {
     }
 
-    public AdviceDto(String title, String description, String authorName) {
+    public AdviceDto(int id, String title, String description, String authorName) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.authorName = authorName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

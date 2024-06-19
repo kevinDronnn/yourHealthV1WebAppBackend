@@ -37,7 +37,7 @@ class AdvicesControllerTest {
 
     @Test
     public void shouldSaveAdvice() throws Exception {
-        AdviceDto adviceDto = new AdviceDto("some","desc","author");
+        AdviceDto adviceDto = new AdviceDto(1,"some","desc","author");
         when(service.addAdvices(any(AdviceDto.class))).thenReturn(adviceDto);
 
 

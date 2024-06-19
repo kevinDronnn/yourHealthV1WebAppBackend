@@ -4,11 +4,13 @@ import com.example.yourhealthv1.entity.AuthenticationResponse;
 import com.example.yourhealthv1.entity.Users;
 import com.example.yourhealthv1.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Service
 public class AuthenticationService {
@@ -27,8 +29,8 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(Users request) {
 
-        if (repository.findUsersByName(request.getUsername()).isPresent()) {
-            return new AuthenticationResponse(null, "User already exist");
+        if ((repository.findUsersByName(request.getUsername()).isPresent() || repository.findUsersByEmail(request.getEmail()).isPresent()) && !Objects.equals(request.getUsername(), "anonymousUser")) {
+            throw new AuthenticationServiceException("Username already exists");
         }
 
         Users user = new Users();

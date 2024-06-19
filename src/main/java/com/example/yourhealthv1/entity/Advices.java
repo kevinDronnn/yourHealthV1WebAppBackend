@@ -26,6 +26,13 @@ public class Advices {
         this.authorName = authorName;
     }
 
+    public Advices(int id, String title, String description, String authorName) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.authorName = authorName;
+    }
+
     public int getId() {
         return id;
     }

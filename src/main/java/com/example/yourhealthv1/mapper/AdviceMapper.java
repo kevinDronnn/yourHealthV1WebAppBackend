@@ -13,12 +13,13 @@ public interface AdviceMapper {
 
     AdviceMapper INSTANCE = Mappers.getMapper(AdviceMapper.class);
 
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "title", source = "title")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "authorName", source = "authorName")
     Advices adviceDtoToAdvicesEntity(AdviceDto adviceDto);
 
-
+    @Mapping(target = "id", source = "id")
     @Mapping(target = "title", source = "title")
     @Mapping(target = "description", source = "description")
     @Mapping(target = "authorName", source = "authorName")

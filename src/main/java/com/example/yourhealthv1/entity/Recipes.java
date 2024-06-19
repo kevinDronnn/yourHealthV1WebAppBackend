@@ -60,6 +60,19 @@ public class Recipes {
         this.fats = fats;
     }
 
+    public Recipes(int id, String name, String description, String image, String authorName, double grams, double cals, double proteins, double carbs, double fats) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.authorName = authorName;
+        this.grams = grams;
+        this.cals = cals;
+        this.proteins = proteins;
+        this.carbs = carbs;
+        this.fats = fats;
+    }
+
     public int getId() {
         return id;
     }
